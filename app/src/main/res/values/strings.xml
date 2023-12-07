@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">TasteOfBharat_FeelTheSpice</string>
+    <string name="hello">Hey There,</string>
+    <string name="create_account">Create an Account</string>
+    <string name="welcome_back">Welcome Back</string>
+
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="hide_password">"Hide Password"</string>
+    <string name="show_password">"Show Password"</string>
+    <string name="register">Register</string>
+    <string name="or">Or</string>
+    <string name="appName">Taste of Bharat</string>
+    <string name="login">Login </string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="appTag">...feel the spice</string>
+    <string name="home">"Home "</string>
+    <string name="signout">Log out</string>
+    <string name="menu">Menu</string>
+    <string name="noLogin">Continue without logging in</string>
+
+
+</resources>
