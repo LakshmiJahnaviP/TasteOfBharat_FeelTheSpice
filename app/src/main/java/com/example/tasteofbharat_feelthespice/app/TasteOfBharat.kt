@@ -6,12 +6,16 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
+import androidx.navigation.NavHost
+import androidx.navigation.compose.rememberNavController
 import com.example.tasteofbharat_feelthespice.R
 import com.example.tasteofbharat_feelthespice.navigation.Screen
 import com.example.tasteofbharat_feelthespice.navigation.TasteOfBharatRouter
 import com.example.tasteofbharat_feelthespice.screens.HomeScreen
 import com.example.tasteofbharat_feelthespice.screens.LoginScreen
 import com.example.tasteofbharat_feelthespice.screens.SignUpScreen
+import com.example.tasteofbharat_feelthespice.screens.TasteOfBharatSplashScreen
+
 
 @Composable
 fun TasteOfBharatApp(){
@@ -31,10 +35,12 @@ fun TasteOfBharatApp(){
                 is Screen.HomeScreen-> {
                     HomeScreen()
                 }
+                is Screen.TOBSplashScreen-> {
+                    TasteOfBharatSplashScreen()
+                }
 
             }
         }
     }
-
 
 }
