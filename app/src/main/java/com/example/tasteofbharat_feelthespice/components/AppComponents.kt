@@ -9,20 +9,29 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Divider
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -44,7 +53,11 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.tasteofbharat_feelthespice.R
+import com.example.tasteofbharat_feelthespice.data.login.LoginViewModel
+import com.example.tasteofbharat_feelthespice.navigation.Screen
+import com.example.tasteofbharat_feelthespice.navigation.TasteOfBharatRouter
 import com.example.tasteofbharat_feelthespice.ui.theme.LightOrange
 import com.example.tasteofbharat_feelthespice.ui.theme.Primary
 import com.example.tasteofbharat_feelthespice.ui.theme.Red
@@ -368,5 +381,186 @@ fun smallButtonComponent(value: String, onButtonClicked: () -> Unit, isEnabled: 
 
         }
     }
+
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun CartDisplayDropdownMenu( ) {
+    // The menu content based on user authentication status
+
+        val loginViewModel: LoginViewModel = viewModel(LoginViewModel::class.java)
+        val isLoggedIn = loginViewModel.isLoggedIn.value
+        var isMenuExpanded by remember { mutableStateOf(false) }
+
+    AppTopAppBar(
+        title = "Cart",
+        onBackClick = { TasteOfBharatRouter.navigateTo(Screen.HomeScreen) },
+        onMenuClick = {
+            isMenuExpanded = !isMenuExpanded
+        },
+        onCartClick = { TasteOfBharatRouter.navigateTo(Screen.CartScreen) }
+    )
+        if (isMenuExpanded) {
+            DropdownMenu(
+                expanded = isMenuExpanded,
+                onDismissRequest = { isMenuExpanded = false }
+            ) {
+                if (isLoggedIn) {
+                    DropdownMenuItem(
+                        text = {
+                            Box(
+                                modifier = Modifier
+                                    .background(Color.Blue)
+                                    .padding(8.dp)
+                            ) {
+                                Text("Sign up", color = Color.White)
+                            }
+                        },
+                        onClick = {  }
+                    )
+                    DropdownMenuItem(
+                        text = {
+                            Box(
+                                modifier = Modifier
+                                    .background(Color.Blue)
+                                    .padding(8.dp)
+                            ) {
+                                Text("Sign up", color = Color.White)
+                            }
+                        },
+                        onClick = {  }
+                    )
+                    DropdownMenuItem(
+                        text = {
+                            Box(
+                                modifier = Modifier
+                                    .background(Color.Blue)
+                                    .padding(8.dp)
+                            ) {
+                                Text("Sign up", color = Color.White)
+                            }
+                        },
+                        onClick = {  }
+                    )} else {
+                    DropdownMenuItem(
+                        text = {
+                            Box(
+                                modifier = Modifier
+                                    .background(Color.Blue)
+                                    .padding(8.dp)
+                            ) {
+                                Text("Sign up", color = Color.White)
+                            }
+                        },
+                        onClick = {  }
+                    )
+                    DropdownMenuItem(
+                        text = {
+                            Box(
+                                modifier = Modifier
+                                    .background(Color.Blue)
+                                    .padding(8.dp)
+                            ) {
+                                Text("Sign up", color = Color.White)
+                            }
+                        },
+                        onClick = {  }
+                    )
+                }
+            }
+        }
+    }
+
+
+
+
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun AppTopAppBar(
+    title: String,
+    onBackClick: () -> Unit,
+    onMenuClick: () -> Unit,
+    onCartClick: () -> Unit) {
+
+    var expanded by remember { mutableStateOf(false) }
+    // Top app bar with back button
+    TopAppBar(
+        navigationIcon = {
+            IconButton(
+                onClick = {
+                    onBackClick()
+                },
+                modifier = Modifier.padding(4.dp),
+                content = {
+                    Icon(
+                        imageVector = Icons.Default.ArrowBack,
+                        contentDescription = "Back",
+                        tint = MaterialTheme.colorScheme.onBackground
+                    )
+                }
+            )
+        },
+        title = {
+            Text(
+                text = title,
+                style = TextStyle(
+                    fontSize = 24.sp,
+                    fontWeight = FontWeight.Bold,
+                    fontStyle = FontStyle.Italic,
+                ),
+                color = Color.Red,
+                textAlign = TextAlign.Center,
+            )
+        },
+        modifier = Modifier.background(color = LightOrange),
+        actions = {
+            // Ensure that this block is inside a @Composable function
+            // This is a typical structure of a @Composable function
+            // Cart button
+                IconButton(
+                    onClick = {
+                        // Handle cart button click using onCartClick callback
+                        onCartClick()
+                    },
+                    modifier = Modifier.padding(4.dp),
+                    content = {
+                        Icon(
+                            imageVector = Icons.Default.ShoppingCart,
+                            contentDescription = "Cart",
+                            tint = MaterialTheme.colorScheme.onBackground
+                        )
+                    }
+                )
+
+
+                IconButton(
+                    onClick = {
+
+                        onMenuClick()
+                    },
+                    modifier = Modifier.padding(4.dp),
+                    content = {
+                        Icon(
+                            imageVector = Icons.Default.Menu,
+                            contentDescription = "Menu",
+                            tint = MaterialTheme.colorScheme.onBackground
+                        )
+
+                    }
+
+                )
+                DropdownMenu(
+                    expanded = expanded,
+                    onDismissRequest = { expanded = false },
+                    modifier = Modifier.background(Color.White)
+                ) {
+
+                }
+
+        }
+    )
+
 
 }

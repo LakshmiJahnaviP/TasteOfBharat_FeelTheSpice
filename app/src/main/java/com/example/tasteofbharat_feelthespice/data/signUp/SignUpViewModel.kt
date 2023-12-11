@@ -3,7 +3,6 @@ package com.example.tasteofbharat_feelthespice.data.signUp
 import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
-import com.example.tasteofbharat_feelthespice.data.Validator
 import com.example.tasteofbharat_feelthespice.navigation.Screen
 import com.example.tasteofbharat_feelthespice.navigation.TasteOfBharatRouter
 import com.google.firebase.auth.FirebaseAuth

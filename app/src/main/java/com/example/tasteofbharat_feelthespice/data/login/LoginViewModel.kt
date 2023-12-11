@@ -1,9 +1,10 @@
 package com.example.tasteofbharat_feelthespice.data.login
 
 import android.util.Log
+import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
-import com.example.tasteofbharat_feelthespice.data.Validator
+import com.example.tasteofbharat_feelthespice.data.signUp.Validator
 import com.example.tasteofbharat_feelthespice.navigation.Screen
 import com.example.tasteofbharat_feelthespice.navigation.TasteOfBharatRouter
 import com.google.firebase.auth.FirebaseAuth
@@ -11,7 +12,8 @@ import com.google.firebase.auth.FirebaseAuth
 
 
 class LoginViewModel : ViewModel() {
-
+    private val _isLoggedIn = mutableStateOf(false)
+    val isLoggedIn: State<Boolean> get() = _isLoggedIn
     private val TAG = LoginViewModel::class.simpleName
 
     var loginUIState = mutableStateOf(  LoginUIState())
@@ -79,6 +81,14 @@ class LoginViewModel : ViewModel() {
                 loginInProgress.value = false
                 if(it.isSuccessful){
                     TasteOfBharatRouter.navigateTo(Screen.HomeScreen)
+                    _isLoggedIn.value=true
+
+                }
+                else {
+                    // Authentication failed
+                    Log.d(TAG, "Inside_login_failure")
+                    Log.d(TAG, "${it.exception?.localizedMessage}")
+                    _isLoggedIn.value=false
                 }
             }
             .addOnFailureListener {
@@ -86,7 +96,7 @@ class LoginViewModel : ViewModel() {
                 Log.d(TAG,"${it.localizedMessage}")
 
                 loginInProgress.value = false
-
+                _isLoggedIn.value=false
             }
 
     }

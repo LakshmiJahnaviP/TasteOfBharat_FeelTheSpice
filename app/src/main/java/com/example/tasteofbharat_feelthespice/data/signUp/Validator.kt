@@ -1,6 +1,4 @@
-package com.example.tasteofbharat_feelthespice.data
-
-import android.util.Log
+package com.example.tasteofbharat_feelthespice.data.signUp
 
 object Validator {
 
@@ -30,11 +28,7 @@ object Validator {
         )
     }
 
-    fun validatePrivacyPolicyAcceptance(statusValue:Boolean):ValidationResult{
-        return ValidationResult(
-            statusValue
-        )
-    }
+
 
 }
 
